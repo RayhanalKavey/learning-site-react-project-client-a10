@@ -1,11 +1,11 @@
-import React from "react";
+import { createBrowserRouter } from "react-router-dom";
+import Main from "../../layout/Main";
+import Tutorials from "../../Pages/Tutorials/Tutorials";
 
-const Routes = () => {
-  return (
-    <div>
-      <h2>This is route</h2>
-    </div>
-  );
-};
-
-export default Routes;
+export const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Main></Main>,
+    children: [{ path: "/", element: <Tutorials></Tutorials> }],
+  },
+]);
