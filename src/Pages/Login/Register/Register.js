@@ -102,7 +102,7 @@ const Register = () => {
     console.log(inputErrors.email);
     console.log(inputErrors.password);
   };
-  console.log(userInformation);
+  // console.log(userInformation);
 
   // --------------------------------------------
   return (
