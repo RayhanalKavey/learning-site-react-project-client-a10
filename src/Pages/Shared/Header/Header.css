@@ -1,0 +1,7 @@
+.nab-bar a {
+  text-decoration: none;
+}
+.active-link {
+  color: #e6d0b7;
+  border: 1px solid #f8f5e7;
+}
