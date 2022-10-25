@@ -5,7 +5,6 @@ import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";
 import "./Register.css";
 import { AuthContext } from "../../../Context/AuthProvider";
-import { GoogleAuthProvider } from "firebase/auth";
 import toast from "react-hot-toast";
 
 const Register = () => {
@@ -27,7 +26,7 @@ const Register = () => {
   });
 
   ///Take information from Auth Context
-  const { handleGoogleLogin, createUser, updateUserProfile } =
+  const { handleGoogleLogin, createUser, updateUserProfile, verifyEmail } =
     useContext(AuthContext);
 
   //--1 Name change handler
@@ -104,11 +103,13 @@ const Register = () => {
       .then((result) => {
         // User create here
         const user = result.user;
-        toast.success(`Welcome!! You logged in with email: ${user?.email}`);
+
         //- reset user
         form.reset(user);
         //Update user
         handleUpdateUserProfile(name, photoURL);
+        //verify email
+        handleEmailVerification();
       })
       .catch((error) => {
         toast.error(error.message);
@@ -126,6 +127,15 @@ const Register = () => {
       .catch((error) => {
         toast.error(error.message);
       });
+  };
+
+  // --8 verify email
+  const handleEmailVerification = () => {
+    verifyEmail()
+      .then(() => {
+        toast.success("Please verify your email address before login!");
+      })
+      .catch((error) => toast.error(error.message));
   };
 
   // console.log(userInformation);

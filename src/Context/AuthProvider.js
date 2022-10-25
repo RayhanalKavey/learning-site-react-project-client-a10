@@ -4,6 +4,8 @@ import {
   getAuth,
   GoogleAuthProvider,
   onAuthStateChanged,
+  sendEmailVerification,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -40,8 +42,10 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       console.log("Inside auth state change", currentUser);
-
-      setUserInfo(currentUser);
+      // notE for logout after email verification error solve
+      if (currentUser === null || currentUser?.emailVerified) {
+        currentUser?.emailVerified && setUserInfo(currentUser);
+      }
     });
     return () => {
       unsubscribe();
@@ -61,12 +65,19 @@ const AuthProvider = ({ children }) => {
   const updateUserProfile = (profile) => {
     return updateProfile(auth.currentUser, profile);
   };
-
-  //------------notE --6 Sign-out
+  //------------notE --6 verify email null
+  const verifyEmail = () => {
+    return sendEmailVerification(auth.currentUser);
+  };
+  //------------notE --7 Sign-out
   const logout = () => {
     ///loading state to prevent the reload log out issue
 
     return signOut(auth);
+  };
+  // notE --8 Forget Password
+  const resetPassword = (email) => {
+    return sendPasswordResetEmail(auth, email);
   };
 
   //-------------------
@@ -78,6 +89,8 @@ const AuthProvider = ({ children }) => {
     updateUserProfile,
     signIn,
     logout,
+    verifyEmail,
+    resetPassword,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
