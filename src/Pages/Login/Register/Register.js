@@ -26,9 +26,6 @@ const Register = () => {
     password: "",
   });
 
-  // workinG Check the create user  error
-  const [createUserError, setCreateUserError] = useState("");
-
   ///Take information from Auth Context
   const { handleGoogleLogin, createUser, updateUserProfile } =
     useContext(AuthContext);
@@ -95,7 +92,7 @@ const Register = () => {
     setAcceptTerms(event.target.checked);
   };
 
-  //--6 Handle submit workinG
+  //--6 Handle submit
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -223,9 +220,6 @@ const Register = () => {
       </div>
       <Form.Text className="d-block mt-4  text-center">
         Already have an account <Link to="/login">Login</Link>
-      </Form.Text>
-      <Form.Text className="d-block  mt-4 text-danger">
-        error: {createUserError}
       </Form.Text>
     </Form>
   );

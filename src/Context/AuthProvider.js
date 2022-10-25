@@ -4,6 +4,7 @@ import {
   getAuth,
   GoogleAuthProvider,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
   updateProfile,
@@ -51,13 +52,17 @@ const AuthProvider = ({ children }) => {
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
+  //-------notE --4 sign-in
+  const signIn = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
 
   //-----------notE --5 update user profile (updateProfile)
   const updateUserProfile = (profile) => {
     return updateProfile(auth.currentUser, profile);
   };
 
-  //------------notE --5 Sign-out
+  //------------notE --6 Sign-out
   const logout = () => {
     ///loading state to prevent the reload log out issue
 
@@ -71,6 +76,7 @@ const AuthProvider = ({ children }) => {
     handleGoogleLogin,
     createUser,
     updateUserProfile,
+    signIn,
     logout,
   };
   return (
