@@ -6,11 +6,12 @@ import Navbar from "react-bootstrap/Navbar";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthProvider";
 import toast from "react-hot-toast";
+import "./Header.css";
 
 const Header = () => {
   const { userInfo, setUserInfo, logout } = useContext(AuthContext);
 
-  ///  Handle log out
+  /// --1 Handle log out
   const handleSignOut = () => {
     logout()
       .then((result) => {
@@ -61,14 +62,28 @@ const Header = () => {
             >
               Blog
             </NavLink>
-            <NavLink>
-              <span>{userInfo?.displayName}</span>
-            </NavLink>
-
             {/* login and register || logout */}
-            <NavLink onClick={handleSignOut}>Logout</NavLink>
-            <NavLink to="/login">Login</NavLink>
-            <NavLink to="/register">Register</NavLink>
+            {userInfo?.uid ? (
+              <div className="d-flex gap-3 ">
+                <NavLink onClick={handleSignOut}>Logout</NavLink>
+                <NavLink className="d-flex gap-3">
+                  <span>{userInfo?.displayName}</span>{" "}
+                  <div>
+                    <img
+                      style={{ height: "40px", borderRadius: "50%" }}
+                      src={userInfo?.photoURL}
+                      alt=""
+                    />
+                  </div>
+                </NavLink>
+              </div>
+            ) : (
+              <div>
+                {" "}
+                <NavLink to="/login">Login</NavLink>
+                <NavLink to="/register">Register</NavLink>
+              </div>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -20,13 +20,18 @@ const Register = () => {
     password: "",
   });
 
-  // Check the errors
+  // Check the input errors
   const [inputErrors, setInputErrors] = useState({
     email: "",
     password: "",
   });
+
+  // workinG Check the create user  error
+  const [createUserError, setCreateUserError] = useState("");
+
   ///Take information from Auth Context
-  const { handleGoogleLogin } = useContext(AuthContext);
+  const { handleGoogleLogin, createUser, updateUserProfile } =
+    useContext(AuthContext);
 
   //--1 Name change handler
   const handleNameChange = (event) => {
@@ -90,18 +95,42 @@ const Register = () => {
     setAcceptTerms(event.target.checked);
   };
 
-  //--6 Handle submit
+  //--6 Handle submit workinG
   const handleSubmit = (event) => {
     event.preventDefault();
-    const name = event.target.name.value;
-    const email = event.target.email.value;
-    const password = event.target.password.value;
-    console.log(name);
-    console.log(email);
-    console.log(password);
-    console.log(inputErrors.email);
-    console.log(inputErrors.password);
+    const form = event.target;
+    const name = form?.name.value;
+    const photoURL = form?.photoURL?.value;
+    const email = form?.email.value;
+    const password = form?.password.value;
+    createUser(email, password)
+      .then((result) => {
+        // User create here
+        const user = result.user;
+        toast.success(`Welcome!! You logged in with email: ${user?.email}`);
+        //- reset user
+        form.reset(user);
+        //Update user
+        handleUpdateUserProfile(name, photoURL);
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
+
+  // --7 update user when cheating.// we also update using this in the profile
+  const handleUpdateUserProfile = (name, photoURL) => {
+    const profile = {
+      displayName: name,
+      photoURL: photoURL,
+    };
+    updateUserProfile(profile)
+      .then(() => {})
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
+
   // console.log(userInformation);
 
   // --------------------------------------------
@@ -111,7 +140,6 @@ const Register = () => {
       <Form.Group className="mb-3" controlId="formBasicName">
         <Form.Label>Name</Form.Label>
         <Form.Control
-          value={userInformation.name}
           onChange={handleNameChange}
           name="name"
           type="text"
@@ -126,7 +154,6 @@ const Register = () => {
       <Form.Group className="mb-3" controlId="formBasicPhotoURL">
         <Form.Label>Photo URL</Form.Label>
         <Form.Control
-          value={userInformation.photoURL}
           onChange={handlePhotoURLChange}
           name="photoURL"
           type="text"
@@ -198,7 +225,7 @@ const Register = () => {
         Already have an account <Link to="/login">Login</Link>
       </Form.Text>
       <Form.Text className="d-block  mt-4 text-danger">
-        email and password login error will be displayed here
+        error: {createUserError}
       </Form.Text>
     </Form>
   );
