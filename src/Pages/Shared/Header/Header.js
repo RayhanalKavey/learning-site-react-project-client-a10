@@ -5,9 +5,23 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthProvider";
+import toast from "react-hot-toast";
 
 const Header = () => {
-  const { userInfo } = useContext(AuthContext);
+  const { userInfo, setUserInfo, logout } = useContext(AuthContext);
+
+  ///  Handle log out
+  const handleSignOut = () => {
+    logout()
+      .then((result) => {
+        toast.success("User logged out!");
+        setUserInfo({});
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <Navbar
       className="nab-bar"
@@ -50,7 +64,9 @@ const Header = () => {
             <NavLink>
               <span>{userInfo?.displayName}</span>
             </NavLink>
-            <NavLink>Logout</NavLink>
+
+            {/* login and register || logout */}
+            <NavLink onClick={handleSignOut}>Logout</NavLink>
             <NavLink to="/login">Login</NavLink>
             <NavLink to="/register">Register</NavLink>
           </Nav>

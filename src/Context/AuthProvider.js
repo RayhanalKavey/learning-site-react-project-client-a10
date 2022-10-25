@@ -4,6 +4,7 @@ import {
   GoogleAuthProvider,
   onAuthStateChanged,
   signInWithPopup,
+  signOut,
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
 import toast from "react-hot-toast";
@@ -43,9 +44,15 @@ const AuthProvider = ({ children }) => {
       unsubscribe();
     };
   }, []);
+  console.log(userInfo?.uid);
+  //------------notE --3 Sign-out
+  const logout = () => {
+    ///loading state to prevent the reload log out issue
 
+    return signOut(auth);
+  };
   //-------------------
-  const authInfo = { userInfo, handleGoogleLogin };
+  const authInfo = { userInfo, setUserInfo, handleGoogleLogin, logout };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );
