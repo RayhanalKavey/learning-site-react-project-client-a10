@@ -1,6 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { Link } from "react-router-dom";
+import "./Register.css";
+import { AuthContext } from "../../../Context/AuthProvider";
+import { GoogleAuthProvider } from "firebase/auth";
+import toast from "react-hot-toast";
+
 const Register = () => {
   // Check if the term and conditions accepted or not
   const [acceptTerms, setAcceptTerms] = useState(false);
@@ -18,6 +25,8 @@ const Register = () => {
     email: "",
     password: "",
   });
+  ///Take information from Auth Context
+  const { handleGoogleLogin } = useContext(AuthContext);
 
   //--1 Name change handler
   const handleNameChange = (event) => {
@@ -94,6 +103,7 @@ const Register = () => {
     console.log(inputErrors.password);
   };
   console.log(userInformation);
+
   // --------------------------------------------
   return (
     <Form onSubmit={handleSubmit}>
@@ -172,6 +182,24 @@ const Register = () => {
       >
         Submit
       </Button>
+      <Form.Text className="d-block mt-4 fw-bold text-center">
+        Register with social accounts
+      </Form.Text>
+      <hr />
+      <div className="d-flex gap-4 mt-3 text-center justify-content-center">
+        <Button onClick={handleGoogleLogin} variant="outline-secondary">
+          <FaGoogle /> Sign in with Google
+        </Button>
+        <Button variant="outline-secondary">
+          <FaGithub /> Sign in with GitHub
+        </Button>
+      </div>
+      <Form.Text className="d-block mt-4  text-center">
+        Already have an account <Link to="/login">Login</Link>
+      </Form.Text>
+      <Form.Text className="d-block  mt-4 text-danger">
+        email and password login error will be displayed here
+      </Form.Text>
     </Form>
   );
 };

@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthProvider";
 
 const Header = () => {
-  const { user } = useContext(AuthContext);
+  const { userInfo } = useContext(AuthContext);
   return (
     <Navbar
       className="nab-bar"
@@ -48,7 +48,7 @@ const Header = () => {
               Blog
             </NavLink>
             <NavLink>
-              <span>{user.displayName}</span>
+              <span>{userInfo?.displayName}</span>
             </NavLink>
             <NavLink>Logout</NavLink>
             <NavLink to="/login">Login</NavLink>
