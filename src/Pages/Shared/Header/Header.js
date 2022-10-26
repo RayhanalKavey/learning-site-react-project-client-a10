@@ -19,7 +19,7 @@ const Header = () => {
         setUserInfo({});
       })
       .catch((error) => {
-        console.log(error);
+        toast.error(error.message);
       });
   };
 

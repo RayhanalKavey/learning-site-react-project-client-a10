@@ -1,15 +1,23 @@
+import { GoogleAuthProvider } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import toast from "react-hot-toast";
 import { FaGithub, FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthProvider";
 
 const Login = () => {
   const [userEmail, setUserEmail] = useState("");
   const [error, setError] = useState("");
-  const { signIn, handleGoogleLogin, resetPassword } = useContext(AuthContext);
+  const { signIn, googleLogin, resetPassword, setLoading } =
+    useContext(AuthContext);
+
+  //-------------notE redirect user
+  const navigate = useNavigate();
+  //-------------notE user location where they want to go
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   //--1 handle login
   const handleSubmit = (event) => {
@@ -23,20 +31,20 @@ const Login = () => {
 
         //ParT reset user
         form.reset(user);
+        //Navigate user to the desired path
+        navigate(from, { replace: true });
 
-        //ParT login after email verification
-        if (user.emailVerified) {
-          toast.success(`Logged in successfully ${user?.displayName}!!`);
-        } else {
-          toast.error(
-            "Your email is not verified !! Please verify your email address."
-          );
-        }
+        toast.success(`Logged in successfully ${user?.displayName}!!`);
+
         //ParT Clear error
         setError("");
       })
       .catch((error) => {
         setError(error.message);
+      })
+      .finally(() => {
+        // solve always show spinner/ this error occurs because we enforce user to verify email
+        setLoading(false);
       });
   };
 
@@ -47,6 +55,21 @@ const Login = () => {
         toast.success("Reset link has been sent, please check email");
       })
       .catch((error) => setError(error.message));
+  };
+
+  //--3 Google sign in
+  const googleProvider = new GoogleAuthProvider();
+  const handleGoogleLogin = () => {
+    googleLogin(googleProvider)
+      .then((result) => {
+        toast.success("Logged in successfully!!");
+        //Navigate user to the desired path
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error.message);
+      });
   };
 
   return (

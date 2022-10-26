@@ -2,10 +2,11 @@ import React, { useContext, useState } from "react";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Register.css";
 import { AuthContext } from "../../../Context/AuthProvider";
 import toast from "react-hot-toast";
+import { GoogleAuthProvider } from "firebase/auth";
 
 const Register = () => {
   // Check if the term and conditions accepted or not
@@ -26,8 +27,14 @@ const Register = () => {
   });
 
   ///Take information from Auth Context
-  const { handleGoogleLogin, createUser, updateUserProfile, verifyEmail } =
+  const { googleLogin, createUser, updateUserProfile, setUserInfo } =
     useContext(AuthContext);
+
+  //-------------notE redirect user
+  const navigate = useNavigate();
+  //-------------notE user location where they want to go
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   //--1 Name change handler
   const handleNameChange = (event) => {
@@ -95,28 +102,31 @@ const Register = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
+    // const name = userInformation?.name;
+    // const photoURL = userInformation?.photoURL;
+    // const email = userInformation?.email;
+    // const password = userInformation?.password;
     const name = form?.name.value;
     const photoURL = form?.photoURL?.value;
     const email = form?.email.value;
     const password = form?.password.value;
-    createUser(email, password)
-      .then((result) => {
-        // User create here
-        const user = result.user;
+    createUser(email, password).then((result) => {
+      // User create here
+      const user = result.user;
 
-        //- reset user
-        form.reset(user);
-        //Update user
-        handleUpdateUserProfile(name, photoURL);
-        //verify email
-        handleEmailVerification();
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      });
+      //- reset user
+      form.reset(user);
+      //Navigate user to the desired path
+      navigate(from, { replace: true });
+      //Update user
+      handleUpdateUserProfile(name, photoURL);
+    });
+    // .catch((error) => {
+    //   toast.error(error.message);
+    // });
   };
 
-  // --7 update user when cheating.// we also update using this in the profile
+  // --7 workinG update user when cheating.// we also update using this in the profile
   const handleUpdateUserProfile = (name, photoURL) => {
     const profile = {
       displayName: name,
@@ -125,19 +135,25 @@ const Register = () => {
     updateUserProfile(profile)
       .then(() => {})
       .catch((error) => {
-        toast.error(error.message);
+        // toast.error("in handle update user profile", error.message);
+        console.log(error);
       });
   };
 
-  // --8 verify email
-  const handleEmailVerification = () => {
-    verifyEmail()
-      .then(() => {
-        toast.success("Please verify your email address before login!");
-      })
-      .catch((error) => toast.error(error.message));
-  };
+  //--8 Google sign in
+  const googleProvider = new GoogleAuthProvider();
+  const handleGoogleLogin = () => {
+    googleLogin(googleProvider)
+      .then((result) => {
+        toast.success("Logged in successfully!!");
 
+        //Navigate user to the desired path
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
   // console.log(userInformation);
 
   // --------------------------------------------
@@ -152,9 +168,6 @@ const Register = () => {
           type="text"
           placeholder="Enter name"
         />
-        {/* <Form.Text className="text-muted">
-          We'll never share your name with anyone else.
-        </Form.Text> */}
       </Form.Group>
 
       {/*--2 Photo URL */}
@@ -166,9 +179,6 @@ const Register = () => {
           type="text"
           placeholder="Enter photo URL"
         />
-        {/* <Form.Text className="text-muted">
-          We'll never share your name with anyone else.
-        </Form.Text> */}
       </Form.Group>
 
       {/*--3 Email */}
@@ -202,8 +212,12 @@ const Register = () => {
         <Form.Check
           onClick={handleTermsAndConditions}
           type="checkbox"
-          label="
-          Accept terms and conditions"
+          label={
+            <>
+              Accept{" "}
+              <Link to={"/terms-and-conditions"}>terms and conditions</Link>{" "}
+            </>
+          }
         />
       </Form.Group>
 
