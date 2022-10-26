@@ -9,6 +9,8 @@ import ErrorPage from "../../Pages/Others/ErrorPage/ErrorPage";
 import Tutorials from "../../Pages/Tutorials/Tutorials";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import TermsAndConditions from "../../Pages/Others/TermsAndConditions/TermsAndConditions";
+import TutorialDetails from "../../Pages/Tutorials/TutorialDetails";
+import Checkout from "../../Checkout/Checkout";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -21,20 +23,36 @@ export const router = createBrowserRouter([
       },
       {
         path: "/tutorials",
-        element: (
-          <PrivateRoute>
-            {" "}
-            <Tutorials></Tutorials>{" "}
-          </PrivateRoute>
-        ),
+        element: <Tutorials></Tutorials>,
+        loader: () => fetch("http://localhost:5005/tutorials"),
       },
-      { path: "/faq", element: <Faq></Faq> },
+      {
+        path: "/faq",
+        element: <Faq></Faq>,
+      },
       { path: "/blog", element: <Blog></Blog> },
       { path: "/login", element: <Login></Login> },
       { path: "/register", element: <Register></Register> },
       {
         path: "/terms-and-conditions",
         element: <TermsAndConditions></TermsAndConditions>,
+      },
+      {
+        path: "/tutorial-details/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:5005/tutorials/${params.id}`),
+
+        element: <TutorialDetails></TutorialDetails>,
+      },
+      {
+        path: "/checkout/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:5005/tutorials/${params.id}`),
+        element: (
+          <PrivateRoute>
+            <Checkout></Checkout>
+          </PrivateRoute>
+        ),
       },
     ],
   },
