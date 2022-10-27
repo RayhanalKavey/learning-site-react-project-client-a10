@@ -66,9 +66,6 @@ const Header = () => {
               <div className="d-flex gap-3 align-items-center">
                 <NavLink onClick={handleSignOut}>Logout</NavLink>
                 {/* workinG Tooltip here */}
-                <NavLink className="d-flex gap-3">
-                  <span className="user-name">{userInfo?.displayName}</span>{" "}
-                </NavLink>
               </div>
             ) : (
               <div className="d-flex justify-content-center align-items-center gap-2">
@@ -97,6 +94,7 @@ const Header = () => {
                   style={{ height: "40px", borderRadius: "50%" }}
                   src={userInfo?.photoURL}
                   alt=""
+                  title={userInfo?.displayName}
                 />
               </div>
             ) : (
