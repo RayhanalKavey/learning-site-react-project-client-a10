@@ -32,11 +32,11 @@ const Header = () => {
       // variant="light"
     >
       <Container>
-        <NavLink to="/">
-          <h5 className="nav-heading mt-2">The Complete React Guideline</h5>
+        <NavLink className="nav-heading-bg d-flex align-items-center" to="/">
+          <h5 className="nav-heading ">The Complete React Guideline</h5>
         </NavLink>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse className="justify-content-end">
+        <Navbar.Collapse className="justify-content-end  mt-lg-0 collapse-nav">
           <Nav className="gap-4 align-items-center nav-item-link">
             <NavLink
               className={({ isActive }) =>
@@ -78,10 +78,24 @@ const Header = () => {
                 </NavLink>
               </div>
             ) : (
-              <div>
+              <div className="d-flex justify-content-center align-items-center gap-2">
                 {" "}
-                <NavLink to="/login">Login</NavLink>
-                <NavLink to="/register">Register</NavLink>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "active-link" : undefined
+                  }
+                  to="/login"
+                >
+                  Login
+                </NavLink>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "active-link" : undefined
+                  }
+                  to="/register"
+                >
+                  Register
+                </NavLink>
               </div>
             )}
           </Nav>

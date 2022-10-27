@@ -15,3 +15,18 @@ body {
 .color-text {
   color: rgb(37, 37, 38);
 }
+.custom-button {
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.2s;
+  background-color: #243147 !important;
+  border: none !important;
+}
+.custom-button:hover {
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.4);
+  transform: translateY(-0.6px);
+}
+.custom-button:active {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4);
+  transform: translateY(-0.3px);
+}

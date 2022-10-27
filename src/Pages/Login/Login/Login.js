@@ -73,46 +73,59 @@ const Login = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      {/* --1 email */}
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control
-          onBlur={(event) => setUserEmail(event.target.value)}
-          name="email"
-          type="email"
-          placeholder="Enter email"
-        />
-      </Form.Group>
+    <div className="form-position d-flex align-items-center-center justify-content-center ">
+      <Form className="c-form p-5 mt-5" onSubmit={handleSubmit}>
+        <Form.Text className="d-block fw-bold fs-3  text-center form-text">
+          Log in!
+        </Form.Text>
+        {/* --1 email */}
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            onBlur={(event) => setUserEmail(event.target.value)}
+            name="email"
+            type="email"
+            placeholder="Enter email"
+          />
+        </Form.Group>
 
-      {/* --2 password */}
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control name="password" type="password" placeholder="Password" />
-        <Form.Text className="text-danger">{error}</Form.Text>
-      </Form.Group>
+        {/* --2 password */}
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            name="password"
+            type="password"
+            placeholder="Password"
+          />
+          <Form.Text className="text-danger">{error}</Form.Text>
+        </Form.Group>
 
-      {/* --3 Button */}
-      <Button variant="primary" type="submit">
-        Log in
-      </Button>
-      <Button onClick={handleReset}>Forget password</Button>
-      <Form.Text className="d-block mt-4 fw-bold text-center">
-        Log in with social accounts
-      </Form.Text>
-      <hr />
-      <div className="d-flex gap-4 mt-3 text-center justify-content-center">
-        <Button onClick={handleGoogleLogin} variant="outline-secondary">
-          <FaGoogle /> Sign in with Google
-        </Button>
-        <Button variant="outline-secondary">
-          <FaGithub /> Sign in with GitHub
-        </Button>
-      </div>
-      <Form.Text className="d-block mt-4  text-center">
-        Not register yet! Please <Link to="/register">Register</Link>
-      </Form.Text>
-    </Form>
+        {/* --3 Button */}
+        <div className="d-flex flex-column flex-md-row gap-2 mt-4  justify-content-start ">
+          <Button className="custom-button" type="submit">
+            Log in
+          </Button>
+          <Button className="custom-button" onClick={handleReset}>
+            Forget password
+          </Button>
+        </div>
+        <Form.Text className="d-block mt-4  fw-bold text-center">
+          Log in with social accounts
+        </Form.Text>
+        <hr />
+        <div className="d-flex  flex-column flex-md-row gap-2 mt-4 text-center justify-content-center">
+          <Button onClick={handleGoogleLogin} variant="outline-secondary">
+            <FaGoogle /> Sign in with Google
+          </Button>
+          <Button variant="outline-secondary">
+            <FaGithub /> Sign in with GitHub
+          </Button>
+        </div>
+        <Form.Text className="d-block mt-4 text-muted  text-center">
+          Not register yet! Please <Link to="/register">Register</Link>
+        </Form.Text>
+      </Form>
+    </div>
   );
 };
 

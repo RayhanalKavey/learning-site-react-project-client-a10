@@ -5,7 +5,6 @@ import "./Tutorials.css";
 
 const Tutorials = () => {
   const tutorials = useLoaderData();
-  console.log(tutorials);
   return (
     <div className="tutorials-component py-4 pe-lg-4 px-5 px-lg-0 ">
       <div className="row">
@@ -13,11 +12,8 @@ const Tutorials = () => {
           <h2 className="text-center mb-4">Tutorials Lists</h2>
           <div className="link-tutorials">
             {tutorials.map((tutorial) => (
-              <Link to={`/tutorial-details/${tutorial.id}`}>
-                <div
-                  className="per-tutorial-link d-flex flex-column align-items-stretch text-center mb-3 mx-3"
-                  key={tutorial.id}
-                >
+              <Link key={tutorial.id} to={`/tutorial-details/${tutorial.id}`}>
+                <div className="per-tutorial-link d-flex flex-column align-items-stretch text-center mb-3 mx-3">
                   {tutorial.title}
                 </div>
               </Link>

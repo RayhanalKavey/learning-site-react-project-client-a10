@@ -1,7 +1,7 @@
 .nab-bar {
   background-color: #243147;
   color: #e5f4ff;
-  height: 5rem;
+  /* height: 5rem; */
 }
 .nab-bar a {
   text-decoration: none;
@@ -14,18 +14,30 @@
   padding: 4px 7px;
   border-radius: 8px;
   align-items: center;
+  transition: all 0.2s;
+  border: 1px solid #243147;
 }
 .nav-item-link a:hover {
   color: #a4b8ef;
-  /* border: 1px solid #f8f5e7; */
+
+  border: 1px solid #a4b8ef;
 }
 .active-link {
-  color: #a4b8ef;
-  border: 1px solid #a4b8ef;
+  color: #a4b8ef !important;
+  border: 1px solid #a4b8ef !important;
 }
 /* .custom-tooltip {
   background-color: aqua;
 } */
 .user-name {
   color: #e5f4ff;
+}
+
+.nav-heading-bg {
+  height: 4rem;
+}
+
+.collapse-nav {
+  background-color: #243147;
+  margin-top: 2rem;
 }

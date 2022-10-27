@@ -158,8 +158,11 @@ const Register = () => {
 
   // --------------------------------------------
   return (
-    <div>
-      <Form onSubmit={handleSubmit}>
+    <div className="form-position d-flex align-items-center-center justify-content-center ">
+      <Form className="c-form p-5 mt-5" onSubmit={handleSubmit}>
+        <Form.Text className="d-block fw-bold fs-3  text-center form-text">
+          Not Register Yet!
+        </Form.Text>
         {/*--1 name */}
         <Form.Group className="mb-3" controlId="formBasicName">
           <Form.Label>Name</Form.Label>
@@ -183,7 +186,7 @@ const Register = () => {
         </Form.Group>
 
         {/*--3 Email */}
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
             onChange={handleEmailChange}
@@ -192,25 +195,30 @@ const Register = () => {
             placeholder="Enter email"
             required
           />
-          <Form.Text className="text-danger">{inputErrors.email}</Form.Text>
+          <Form.Text className="text-danger  ms-2">
+            {inputErrors.email}
+          </Form.Text>
         </Form.Group>
 
         {/*--4 password */}
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
+          <Form.Label className=" text-muted">Password</Form.Label>
           <Form.Control
             onChange={handlePasswordChange}
             name="password"
             type="password"
-            placeholder="Password"
+            placeholder="password"
             required
           />
-          <Form.Text className=" text-danger">{inputErrors.password}</Form.Text>
+          <Form.Text className=" text-danger ms-2 ">
+            {inputErrors.password}
+          </Form.Text>
         </Form.Group>
 
         {/*--5 Terms and conditions */}
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
           <Form.Check
+            className="text-muted"
             onClick={handleTermsAndConditions}
             type="checkbox"
             label={
@@ -224,18 +232,21 @@ const Register = () => {
 
         {/*--6 submit */}
         <Button
-          className={` ${!acceptTerms ? " btn-danger" : " btn-primary"}`}
+          className={` ${
+            !acceptTerms
+              ? "  btn-danger submit-custom-button"
+              : " btn-primary custom-button"
+          }`}
           disabled={!acceptTerms}
-          variant="primary"
           type="submit"
         >
           Submit
         </Button>
-        <Form.Text className="d-block mt-4 fw-bold text-center">
+        <Form.Text className="d-block mt-4  fw-bold text-center">
           Register with social accounts
         </Form.Text>
         <hr />
-        <div className="d-flex gap-4 mt-3 text-center justify-content-center">
+        <div className="d-flex  flex-column flex-md-row gap-2 mt-4 text-center justify-content-center">
           <Button onClick={handleGoogleLogin} variant="outline-secondary">
             <FaGoogle /> Sign in with Google
           </Button>
@@ -243,7 +254,7 @@ const Register = () => {
             <FaGithub /> Sign in with GitHub
           </Button>
         </div>
-        <Form.Text className="d-block mt-4  text-center">
+        <Form.Text className="d-block mt-4  text-center text-muted">
           Already have an account <Link to="/login">Login</Link>
         </Form.Text>
       </Form>

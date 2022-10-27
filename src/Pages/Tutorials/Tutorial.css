@@ -8,7 +8,9 @@
 .custom-card img {
   height: 13rem;
 }
-
+.card-style {
+  transition: all 0.2s;
+}
 .card-style:hover {
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.4);
   transform: translateY(-2px);
