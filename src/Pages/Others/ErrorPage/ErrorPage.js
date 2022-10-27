@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useRouteError } from "react-router-dom";
 
 const ErrorPage = () => {
-  // notE dynamic error page
+  //  dynamic error page
   const error = useRouteError();
   const { status, statusText } = error;
   return (

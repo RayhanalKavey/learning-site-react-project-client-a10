@@ -10,7 +10,6 @@ import { AuthContext } from "../../../Context/AuthProvider";
 const Login = () => {
   const [userEmail, setUserEmail] = useState("");
   const [error, setError] = useState("");
-  // workinG
   const {
     signIn,
     googleLogin,
@@ -21,9 +20,9 @@ const Login = () => {
     setUserInfo,
   } = useContext(AuthContext);
 
-  //-------------notE redirect user
+  //------------- redirect user
   const navigate = useNavigate();
-  //-------------notE user location where they want to go
+  //------------- user location where they want to go
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
@@ -67,7 +66,7 @@ const Login = () => {
         toast.error(error.message);
       });
   };
-  // handle login workinG
+  // handle login 
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -76,8 +75,6 @@ const Login = () => {
     signIn(email, password)
       .then((result) => {
         const user = result.user;
-        console.log("from login:999", user);
-
         //ParT reset user
         form.reset();
         //ParT Clear error

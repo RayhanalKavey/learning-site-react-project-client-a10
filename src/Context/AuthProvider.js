@@ -21,32 +21,32 @@ const AuthProvider = ({ children }) => {
   ///leading state to prevent the reload log out issue
   const [loading, setLoading] = useState(true);
 
-  //---------------notE  Google sign in
+  //---------------  Google sign in
 
   const googleLogin = (provider) => {
     setLoading(true);
     return signInWithPopup(auth, provider);
   };
-  //-------------workinG Github login
+  //-------------Github login
 
   const gitHubLogin = (provider) => {
     setLoading(true);
     return signInWithPopup(auth, provider);
   };
-  ///-----------------notE create user with email and password
+  ///----------------- create user with email and password
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
-  //-------notE sign-in
+  //------- sign-in
   const signIn = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
-  //---------notE Observe user
+  //---------Observe user
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log("Inside auth state change", currentUser);
+      // console.log("Inside auth state change", currentUser);
 
       setUserInfo(currentUser);
       ///leading state to prevent the reload log out issue
@@ -56,19 +56,19 @@ const AuthProvider = ({ children }) => {
       unsubscribe();
     };
   }, []);
-  //-----------notE  workinG update user profile (updateProfile)
+  //-----------update user profile (updateProfile)
   const updateUserProfile = (profile) => {
     setLoading(true);
     return updateProfile(auth.currentUser, profile);
   };
 
-  //------------notE Sign-out
+  //------------Sign-out
   const logout = () => {
     ///loading state to prevent the reload log out issue
     setLoading(true);
     return signOut(auth);
   };
-  // notE --------- Forget Password
+  // --------- Forget Password
   const resetPassword = (email) => {
     setLoading(true);
     return sendPasswordResetEmail(auth, email);

@@ -6,7 +6,6 @@ import { AuthContext } from "../../Context/AuthProvider";
 const PrivateRoute = ({ children }) => {
   const { userInfo, loading } = useContext(AuthContext);
   //before check the user first catch the user's current location
-  // console.log(userInfo);
   const location = useLocation();
   if (loading) {
     // Use spinner here

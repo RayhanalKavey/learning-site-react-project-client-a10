@@ -27,7 +27,7 @@ const Header = () => {
   // document.getElementsByClassName=
   //   },[])
 
-  /// --1 Handle log out
+  /// Handle log out
   const handleSignOut = () => {
     logout()
       .then((result) => {
@@ -80,7 +80,7 @@ const Header = () => {
             {userInfo?.uid ? (
               <div className="d-flex gap-3 align-items-center justify-content-end">
                 <NavLink onClick={handleSignOut}>Logout</NavLink>
-                {/* workinG Tooltip here */}
+                {/* Tooltip here */}
                 <div
                   onClick={() => toggleTheme()}
                   className={`buttn  ${theme}`}
@@ -88,6 +88,7 @@ const Header = () => {
                   {" "}
                   Switch theme
                 </div>
+                {/*  */}
                 {/* <div className="form-check form-switch">
                   <input
                     className="form-check-input"
@@ -102,6 +103,7 @@ const Header = () => {
                     <button className="nab-bar-light">button</button>
                   </label>
                 </div> */}
+                {/*  */}
               </div>
             ) : (
               <div className="d-flex justify-content-center align-items-center gap-2">

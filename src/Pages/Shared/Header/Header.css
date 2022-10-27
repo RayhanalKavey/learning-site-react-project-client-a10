@@ -49,6 +49,7 @@
 .buttn {
   padding: 4px 8px;
   cursor: pointer;
+  border-radius: 8px;
 }
 .light-theme {
   background-color: #e5f4ff;

@@ -24,13 +24,13 @@ const Register = () => {
     password: "",
   });
 
-  ///Take information from Auth Context workinG
+  ///Take information from Auth Context
   const { googleLogin, createUser, updateUserProfile, setUserInfo, userInfo } =
     useContext(AuthContext);
 
-  //-------------notE redirect user
+  //------------- redirect user
   const navigate = useNavigate();
-  //-------------notE user location where they want to go
+  //------------- user location where they want to go
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
@@ -96,7 +96,7 @@ const Register = () => {
     setAcceptTerms(event.target.checked);
   };
 
-  // Handle submit workinG
+  // Handle submit
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -112,7 +112,7 @@ const Register = () => {
       .then((result) => {
         // User create here
         const user = result.user;
-        console.log("From create user", user);
+        toast.success("User cleated successfully.");
         setUserInfo(user);
         //- reset user
         form.reset();
@@ -127,7 +127,7 @@ const Register = () => {
       });
   };
 
-  //  workinG update user when cheating.// we also update using this in the profile
+  //  update user when cheating.// we also update using this in the profile
   const handleUpdateUserProfile = (name, photoURL) => {
     const profile = {
       displayName: name,
@@ -137,7 +137,6 @@ const Register = () => {
       .then(() => {})
       .catch((error) => {
         toast.error(error.message);
-        console.log("in handle update user profile", error);
       });
   };
   // useEffect(() => {
