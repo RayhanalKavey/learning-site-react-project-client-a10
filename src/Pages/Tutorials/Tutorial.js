@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./Tutorial.css";
 
 const Tutorial = ({ tutorial }) => {
-  const { id, title, description, img, details } = tutorial;
+  const { title, description, img } = tutorial;
   return (
     <div className="custom-card col-lg-6 col-xl-4 g-4">
       <Link to={`/tutorial-details/${tutorial.id}`}>

@@ -8,7 +8,7 @@ const Tutorials = () => {
   return (
     <div className="tutorials-component py-4 pe-lg-4 px-5 px-lg-0 ">
       <div className="row">
-        <div className="col-lg-3">
+        <aside className="col-lg-3">
           <h2 className="text-center mb-4">Tutorials Lists</h2>
           <div className="link-tutorials">
             {tutorials.map((tutorial) => (
@@ -19,8 +19,8 @@ const Tutorials = () => {
               </Link>
             ))}
           </div>
-        </div>
-        <div className="col-lg-9">
+        </aside>
+        <section className="col-lg-9">
           <h2 className="mb-0">React Tutorials</h2>
           <div className="row">
             {tutorials.map((tutorial) => (
@@ -31,7 +31,7 @@ const Tutorials = () => {
               ></Tutorial>
             ))}
           </div>
-        </div>
+        </section>
       </div>
     </div>
   );
