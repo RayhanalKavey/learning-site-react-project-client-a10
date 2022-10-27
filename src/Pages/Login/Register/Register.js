@@ -1,12 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { FaGithub, FaGoogle } from "react-icons/fa";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Register.css";
 import { AuthContext } from "../../../Context/AuthProvider";
 import toast from "react-hot-toast";
-import { GoogleAuthProvider } from "firebase/auth";
 
 const Register = () => {
   // Check if the term and conditions accepted or not
@@ -36,17 +34,17 @@ const Register = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  //--1 Name change handler
+  // Name change handler
   const handleNameChange = (event) => {
     setUserInformation({ ...userInformation, name: event.target.value });
   };
 
-  //--2 Photo URL change handler
+  //Photo URL change handler
   const handlePhotoURLChange = (event) => {
     setUserInformation({ ...userInformation, photoURL: event.target.value });
   };
 
-  //--3 email change handler
+  //email change handler
   const handleEmailChange = (event) => {
     const emailValue = event.target.value;
     if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailValue)) {
@@ -64,7 +62,7 @@ const Register = () => {
     }
   };
 
-  //--4 email change handler with errors
+  //email change handler with errors
   const emailErrorMessage = (message) => {
     return setInputErrors({
       ...inputErrors,
@@ -93,18 +91,12 @@ const Register = () => {
     }
   };
 
-  //--5 Handle Terms and conditions
+  // Handle Terms and conditions
   const handleTermsAndConditions = (event) => {
     setAcceptTerms(event.target.checked);
   };
-  ///
-  useEffect(() => {
-    if (userInfo?.uid) {
-      handleUpdateUserProfile(userInformation.name, userInformation.photoURL);
-    }
-  }, [userInfo]);
 
-  //--6 Handle submit workinG
+  // Handle submit workinG
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -135,7 +127,7 @@ const Register = () => {
       });
   };
 
-  // --7 workinG update user when cheating.// we also update using this in the profile
+  //  workinG update user when cheating.// we also update using this in the profile
   const handleUpdateUserProfile = (name, photoURL) => {
     const profile = {
       displayName: name,
@@ -154,26 +146,12 @@ const Register = () => {
   //   }
   // }, [userInfo]);
 
-  //--8 Google sign in
-  const googleProvider = new GoogleAuthProvider();
-  const handleGoogleLogin = () => {
-    googleLogin(googleProvider)
-      .then((result) => {
-        toast.success("Logged in successfully!!");
-
-        //Navigate user to the desired path
-        navigate(from, { replace: true });
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      });
-  };
   // console.log(userInformation);
 
   // --------------------------------------------
   return (
     <div className="form-position d-flex align-items-center-center justify-content-center ">
-      <Form className="c-form p-5 mt-5" onSubmit={handleSubmit}>
+      <Form className="c-form p-5 mt-5 w-50" onSubmit={handleSubmit}>
         <Form.Text className="d-block fw-bold fs-3  text-center form-text">
           Not Register Yet!
         </Form.Text>
@@ -256,18 +234,7 @@ const Register = () => {
         >
           Submit
         </Button>
-        <Form.Text className="d-block mt-4  fw-bold text-center">
-          Register with social accounts
-        </Form.Text>
-        <hr />
-        <div className="d-flex  flex-column flex-md-row gap-2 mt-4 text-center justify-content-center">
-          <Button onClick={handleGoogleLogin} variant="outline-secondary">
-            <FaGoogle /> Sign in with Google
-          </Button>
-          <Button variant="outline-secondary">
-            <FaGithub /> Sign in with GitHub
-          </Button>
-        </div>
+
         <Form.Text className="d-block mt-4  text-center text-muted">
           Already have an account <Link to="/login">Login</Link>
         </Form.Text>

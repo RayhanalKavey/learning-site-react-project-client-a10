@@ -21,19 +21,29 @@ const AuthProvider = ({ children }) => {
   ///leading state to prevent the reload log out issue
   const [loading, setLoading] = useState(true);
 
-  //---------------notE --1 Google sign in
+  //---------------notE  Google sign in
 
   const googleLogin = (provider) => {
     setLoading(true);
     return signInWithPopup(auth, provider);
   };
-  //-----------notE --2 workinG update user profile (updateProfile)
-  const updateUserProfile = (profile) => {
-    setLoading(true);
-    return updateProfile(auth.currentUser, profile);
-  };
+  //-------------workinG Github login
 
-  //---------notE --3 Observe user
+  const gitHubLogin = (provider) => {
+    setLoading(true);
+    return signInWithPopup(auth, provider);
+  };
+  ///-----------------notE create user with email and password
+  const createUser = (email, password) => {
+    setLoading(true);
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
+  //-------notE sign-in
+  const signIn = (email, password) => {
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+  //---------notE Observe user
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       console.log("Inside auth state change", currentUser);
@@ -46,25 +56,19 @@ const AuthProvider = ({ children }) => {
       unsubscribe();
     };
   }, []);
-
-  ///-----------------notE --4 create user with email and password
-  const createUser = (email, password) => {
+  //-----------notE  workinG update user profile (updateProfile)
+  const updateUserProfile = (profile) => {
     setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password);
-  };
-  //-------notE --5 sign-in
-  const signIn = (email, password) => {
-    setLoading(true);
-    return signInWithEmailAndPassword(auth, email, password);
+    return updateProfile(auth.currentUser, profile);
   };
 
-  //------------notE --6 Sign-out
+  //------------notE Sign-out
   const logout = () => {
     ///loading state to prevent the reload log out issue
     setLoading(true);
     return signOut(auth);
   };
-  // notE --7 Forget Password
+  // notE --------- Forget Password
   const resetPassword = (email) => {
     setLoading(true);
     return sendPasswordResetEmail(auth, email);
@@ -81,6 +85,7 @@ const AuthProvider = ({ children }) => {
     logout,
     resetPassword,
     loading,
+    gitHubLogin,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

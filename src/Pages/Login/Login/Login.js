@@ -1,4 +1,4 @@
-import { GoogleAuthProvider } from "firebase/auth";
+import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -11,8 +11,15 @@ const Login = () => {
   const [userEmail, setUserEmail] = useState("");
   const [error, setError] = useState("");
   // workinG
-  const { signIn, googleLogin, resetPassword, setLoading } =
-    useContext(AuthContext);
+  const {
+    signIn,
+    googleLogin,
+    gitHubLogin,
+    resetPassword,
+    setLoading,
+    userInfo,
+    setUserInfo,
+  } = useContext(AuthContext);
 
   //-------------notE redirect user
   const navigate = useNavigate();
@@ -20,7 +27,47 @@ const Login = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  //--1 handle login workinG
+  // Reset Pass
+  const handleReset = () => {
+    resetPassword(userEmail)
+      .then(() => {
+        toast.success("Reset link has been sent, please check email");
+      })
+      .catch((error) => setError(error.message));
+  };
+
+  // Google sign in
+  const googleProvider = new GoogleAuthProvider();
+  const handleGoogleLogin = () => {
+    googleLogin(googleProvider)
+      .then((result) => {
+        const user = result.user;
+        setUserInfo(user);
+        toast.success("Logged in successfully!!");
+        //Navigate user to the desired path
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
+  //github sign in
+  const githubProvider = new GithubAuthProvider();
+  const handleGithubLogin = () => {
+    gitHubLogin(githubProvider)
+      .then((result) => {
+        const user = result.user;
+        setUserInfo(user);
+
+        toast.success("Logged in successfully!!");
+        //Navigate user to the desired path
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
+  // handle login workinG
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -29,7 +76,7 @@ const Login = () => {
     signIn(email, password)
       .then((result) => {
         const user = result.user;
-        console.log("from login", user);
+        console.log("from login:999", user);
 
         //ParT reset user
         form.reset();
@@ -42,36 +89,12 @@ const Login = () => {
       })
       .catch((error) => {
         setError(error.message);
-      })
-      .finally(() => {
-        // solve always show spinner/ this error occurs because we enforce user to verify email
-        setLoading(false);
       });
+    // .finally(() => {
+    //   // solve always show spinner/ this error occurs because we enforce user to verify email
+    //   setLoading(false);
+    // });
   };
-
-  //--2 Reset Pass
-  const handleReset = () => {
-    resetPassword(userEmail)
-      .then(() => {
-        toast.success("Reset link has been sent, please check email");
-      })
-      .catch((error) => setError(error.message));
-  };
-
-  //--3 Google sign in
-  const googleProvider = new GoogleAuthProvider();
-  const handleGoogleLogin = () => {
-    googleLogin(googleProvider)
-      .then((result) => {
-        toast.success("Logged in successfully!!");
-        //Navigate user to the desired path
-        navigate(from, { replace: true });
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      });
-  };
-
   return (
     <div className="form-position d-flex align-items-center-center justify-content-center ">
       <Form className="c-form p-5 mt-5" onSubmit={handleSubmit}>
@@ -119,7 +142,7 @@ const Login = () => {
           <Button onClick={handleGoogleLogin} variant="outline-secondary">
             <FaGoogle /> Sign in with Google
           </Button>
-          <Button variant="outline-secondary">
+          <Button onClick={handleGithubLogin} variant="outline-secondary">
             <FaGithub /> Sign in with GitHub
           </Button>
         </div>
