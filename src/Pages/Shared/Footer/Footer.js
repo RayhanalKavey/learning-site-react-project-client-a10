@@ -1,9 +1,9 @@
 import React from "react";
-
+import "./Footer.css";
 const Footer = () => {
   return (
-    <div>
-      <h2>This is footer.</h2>
+    <div className="container-footer d-flex align-items-center justify-content-center ">
+      <p className="text-light text-muted">Copyright issue.</p>
     </div>
   );
 };
