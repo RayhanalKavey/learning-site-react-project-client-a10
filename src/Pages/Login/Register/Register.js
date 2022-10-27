@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -26,8 +26,8 @@ const Register = () => {
     password: "",
   });
 
-  ///Take information from Auth Context
-  const { googleLogin, createUser, updateUserProfile, setUserInfo } =
+  ///Take information from Auth Context workinG
+  const { googleLogin, createUser, updateUserProfile, setUserInfo, userInfo } =
     useContext(AuthContext);
 
   //-------------notE redirect user
@@ -97,8 +97,14 @@ const Register = () => {
   const handleTermsAndConditions = (event) => {
     setAcceptTerms(event.target.checked);
   };
+  ///
+  useEffect(() => {
+    if (userInfo?.uid) {
+      handleUpdateUserProfile(userInformation.name, userInformation.photoURL);
+    }
+  }, [userInfo]);
 
-  //--6 Handle submit
+  //--6 Handle submit workinG
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -110,20 +116,23 @@ const Register = () => {
     const photoURL = form?.photoURL?.value;
     const email = form?.email.value;
     const password = form?.password.value;
-    createUser(email, password).then((result) => {
-      // User create here
-      const user = result.user;
+    createUser(email, password)
+      .then((result) => {
+        // User create here
+        const user = result.user;
+        console.log("From create user", user);
+        setUserInfo(user);
+        //- reset user
+        form.reset();
+        //Navigate user to the desired path
+        navigate(from, { replace: true });
+        //Update user
 
-      //- reset user
-      form.reset(user);
-      //Navigate user to the desired path
-      navigate(from, { replace: true });
-      //Update user
-      handleUpdateUserProfile(name, photoURL);
-    });
-    // .catch((error) => {
-    //   toast.error(error.message);
-    // });
+        handleUpdateUserProfile(name, photoURL);
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
 
   // --7 workinG update user when cheating.// we also update using this in the profile
@@ -135,10 +144,15 @@ const Register = () => {
     updateUserProfile(profile)
       .then(() => {})
       .catch((error) => {
-        // toast.error("in handle update user profile", error.message);
-        console.log(error);
+        toast.error(error.message);
+        console.log("in handle update user profile", error);
       });
   };
+  // useEffect(() => {
+  //   if (userInfo?.uid) {
+  //     handleUpdateUserProfile(userInformation?.name, userInformation?.photoURL);
+  //   }
+  // }, [userInfo]);
 
   //--8 Google sign in
   const googleProvider = new GoogleAuthProvider();

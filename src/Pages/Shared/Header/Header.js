@@ -6,6 +6,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthProvider";
 import toast from "react-hot-toast";
+import { FaUser } from "react-icons/fa";
 import "./Header.css";
 
 const Header = () => {
@@ -28,8 +29,6 @@ const Header = () => {
       className="nab-bar  align-items-center"
       collapseOnSelect
       expand="lg"
-      // bg="light"
-      // variant="light"
     >
       <Container>
         <NavLink className="nav-heading-bg d-flex align-items-center" to="/">
@@ -66,15 +65,9 @@ const Header = () => {
             {userInfo?.uid ? (
               <div className="d-flex gap-3 align-items-center">
                 <NavLink onClick={handleSignOut}>Logout</NavLink>
+                {/* workinG Tooltip here */}
                 <NavLink className="d-flex gap-3">
                   <span className="user-name">{userInfo?.displayName}</span>{" "}
-                  <div>
-                    <img
-                      style={{ height: "40px", borderRadius: "50%" }}
-                      src={userInfo?.photoURL}
-                      alt=""
-                    />
-                  </div>
                 </NavLink>
               </div>
             ) : (
@@ -97,6 +90,20 @@ const Header = () => {
                   Register
                 </NavLink>
               </div>
+            )}
+            {userInfo?.photoURL ? (
+              <div>
+                <img
+                  style={{ height: "40px", borderRadius: "50%" }}
+                  src={userInfo?.photoURL}
+                  alt=""
+                />
+              </div>
+            ) : (
+              <FaUser
+                className="bg-white p-1 rounded-5 "
+                style={{ color: "white", fontSize: "1.5em" }}
+              ></FaUser>
             )}
           </Nav>
         </Navbar.Collapse>

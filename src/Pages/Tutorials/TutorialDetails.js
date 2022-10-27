@@ -7,14 +7,21 @@ const TutorialDetails = () => {
   return (
     <section className="tutorial-container h-100 ">
       <div className="w-75  d-flex flex-column mx-auto py-5 color-text">
-        <h3 className="text-center mb-5 ">{title}</h3>
+        <div className="d-flex justify-content-between mb-5 ">
+          <h3 className=" ">{title}</h3>
+          <button className="btn btn-primary custom-button">
+            Download PDF
+          </button>
+        </div>
         <img className="rounded rounded-4 w-75 mx-auto" src={img} alt="" />
         <div>
           <h3 className="mt-5 ">Area Covered</h3>
           <p>{details}</p>
           <div className="mb-3">
-            {details.map((detail) => (
-              <li className="ms-4">{detail}</li>
+            {details.map((detail, idx) => (
+              <li key={idx} className="ms-4">
+                {detail}
+              </li>
             ))}
           </div>
         </div>

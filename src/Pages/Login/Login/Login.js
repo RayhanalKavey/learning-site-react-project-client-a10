@@ -10,6 +10,7 @@ import { AuthContext } from "../../../Context/AuthProvider";
 const Login = () => {
   const [userEmail, setUserEmail] = useState("");
   const [error, setError] = useState("");
+  // workinG
   const { signIn, googleLogin, resetPassword, setLoading } =
     useContext(AuthContext);
 
@@ -19,7 +20,7 @@ const Login = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  //--1 handle login
+  //--1 handle login workinG
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -28,16 +29,16 @@ const Login = () => {
     signIn(email, password)
       .then((result) => {
         const user = result.user;
+        console.log("from login", user);
 
         //ParT reset user
-        form.reset(user);
+        form.reset();
+        //ParT Clear error
+        setError("");
         //Navigate user to the desired path
         navigate(from, { replace: true });
 
         toast.success(`Logged in successfully ${user?.displayName}!!`);
-
-        //ParT Clear error
-        setError("");
       })
       .catch((error) => {
         setError(error.message);
@@ -67,7 +68,6 @@ const Login = () => {
         navigate(from, { replace: true });
       })
       .catch((error) => {
-        console.log(error);
         toast.error(error.message);
       });
   };
@@ -86,6 +86,7 @@ const Login = () => {
             name="email"
             type="email"
             placeholder="Enter email"
+            required
           />
         </Form.Group>
 
@@ -96,6 +97,7 @@ const Login = () => {
             name="password"
             type="password"
             placeholder="Password"
+            required
           />
           <Form.Text className="text-danger">{error}</Form.Text>
         </Form.Group>

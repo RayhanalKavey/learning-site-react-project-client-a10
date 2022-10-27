@@ -6,7 +6,7 @@ const Tutorial = ({ tutorial }) => {
   const { title, description, img } = tutorial;
   return (
     <div className="custom-card col-lg-6 col-xl-4 g-4">
-      <Link to={`/tutorial-details/${tutorial.id}`}>
+      <Link key={tutorial.id} to={`/tutorial-details/${tutorial.id}`}>
         <div className="col ">
           <div className="card card-style">
             <img src={img} className="card-img-top" alt="" />

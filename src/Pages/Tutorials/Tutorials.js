@@ -26,7 +26,7 @@ const Tutorials = () => {
             {tutorials.map((tutorial) => (
               <Tutorial
                 tutorial={tutorial}
-                key={tutorial?.id}
+                key={tutorial.id}
                 className="col-lg-4 j"
               ></Tutorial>
             ))}
