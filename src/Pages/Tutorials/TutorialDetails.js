@@ -9,7 +9,7 @@ const TutorialDetails = () => {
   return (
     <section className="tutorial-container h-100 ">
       <div className="w-75  d-flex flex-column mx-auto py-5 color-text">
-        <div className="d-flex justify-content-between mb-5 ">
+        <div className="d-flex flex-column flex-md-row justify-content-between mb-5 ">
           <h3 className=" ">{title}</h3>
           <ReactToPrint
             trigger={() => (
