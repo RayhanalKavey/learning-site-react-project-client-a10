@@ -158,94 +158,96 @@ const Register = () => {
 
   // --------------------------------------------
   return (
-    <Form onSubmit={handleSubmit}>
-      {/*--1 name */}
-      <Form.Group className="mb-3" controlId="formBasicName">
-        <Form.Label>Name</Form.Label>
-        <Form.Control
-          onChange={handleNameChange}
-          name="name"
-          type="text"
-          placeholder="Enter name"
-        />
-      </Form.Group>
+    <div>
+      <Form onSubmit={handleSubmit}>
+        {/*--1 name */}
+        <Form.Group className="mb-3" controlId="formBasicName">
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            onChange={handleNameChange}
+            name="name"
+            type="text"
+            placeholder="Enter name"
+          />
+        </Form.Group>
 
-      {/*--2 Photo URL */}
-      <Form.Group className="mb-3" controlId="formBasicPhotoURL">
-        <Form.Label>Photo URL</Form.Label>
-        <Form.Control
-          onChange={handlePhotoURLChange}
-          name="photoURL"
-          type="text"
-          placeholder="Enter photo URL"
-        />
-      </Form.Group>
+        {/*--2 Photo URL */}
+        <Form.Group className="mb-3" controlId="formBasicPhotoURL">
+          <Form.Label>Photo URL</Form.Label>
+          <Form.Control
+            onChange={handlePhotoURLChange}
+            name="photoURL"
+            type="text"
+            placeholder="Enter photo URL"
+          />
+        </Form.Group>
 
-      {/*--3 Email */}
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control
-          onChange={handleEmailChange}
-          name="email"
-          type="email"
-          placeholder="Enter email"
-          required
-        />
-        <Form.Text className="text-danger">{inputErrors.email}</Form.Text>
-      </Form.Group>
+        {/*--3 Email */}
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            onChange={handleEmailChange}
+            name="email"
+            type="email"
+            placeholder="Enter email"
+            required
+          />
+          <Form.Text className="text-danger">{inputErrors.email}</Form.Text>
+        </Form.Group>
 
-      {/*--4 password */}
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control
-          onChange={handlePasswordChange}
-          name="password"
-          type="password"
-          placeholder="Password"
-          required
-        />
-        <Form.Text className=" text-danger">{inputErrors.password}</Form.Text>
-      </Form.Group>
+        {/*--4 password */}
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            onChange={handlePasswordChange}
+            name="password"
+            type="password"
+            placeholder="Password"
+            required
+          />
+          <Form.Text className=" text-danger">{inputErrors.password}</Form.Text>
+        </Form.Group>
 
-      {/*--5 Terms and conditions */}
-      <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        <Form.Check
-          onClick={handleTermsAndConditions}
-          type="checkbox"
-          label={
-            <>
-              Accept{" "}
-              <Link to={"/terms-and-conditions"}>terms and conditions</Link>{" "}
-            </>
-          }
-        />
-      </Form.Group>
+        {/*--5 Terms and conditions */}
+        <Form.Group className="mb-3" controlId="formBasicCheckbox">
+          <Form.Check
+            onClick={handleTermsAndConditions}
+            type="checkbox"
+            label={
+              <>
+                Accept{" "}
+                <Link to={"/terms-and-conditions"}>terms and conditions</Link>{" "}
+              </>
+            }
+          />
+        </Form.Group>
 
-      {/*--6 submit */}
-      <Button
-        className={` ${!acceptTerms ? " btn-danger" : " btn-primary"}`}
-        disabled={!acceptTerms}
-        variant="primary"
-        type="submit"
-      >
-        Submit
-      </Button>
-      <Form.Text className="d-block mt-4 fw-bold text-center">
-        Register with social accounts
-      </Form.Text>
-      <hr />
-      <div className="d-flex gap-4 mt-3 text-center justify-content-center">
-        <Button onClick={handleGoogleLogin} variant="outline-secondary">
-          <FaGoogle /> Sign in with Google
+        {/*--6 submit */}
+        <Button
+          className={` ${!acceptTerms ? " btn-danger" : " btn-primary"}`}
+          disabled={!acceptTerms}
+          variant="primary"
+          type="submit"
+        >
+          Submit
         </Button>
-        <Button variant="outline-secondary">
-          <FaGithub /> Sign in with GitHub
-        </Button>
-      </div>
-      <Form.Text className="d-block mt-4  text-center">
-        Already have an account <Link to="/login">Login</Link>
-      </Form.Text>
-    </Form>
+        <Form.Text className="d-block mt-4 fw-bold text-center">
+          Register with social accounts
+        </Form.Text>
+        <hr />
+        <div className="d-flex gap-4 mt-3 text-center justify-content-center">
+          <Button onClick={handleGoogleLogin} variant="outline-secondary">
+            <FaGoogle /> Sign in with Google
+          </Button>
+          <Button variant="outline-secondary">
+            <FaGithub /> Sign in with GitHub
+          </Button>
+        </div>
+        <Form.Text className="d-block mt-4  text-center">
+          Already have an account <Link to="/login">Login</Link>
+        </Form.Text>
+      </Form>
+    </div>
   );
 };
 

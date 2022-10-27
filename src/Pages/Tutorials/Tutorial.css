@@ -1,0 +1,19 @@
+.custom-card a {
+  text-decoration: none;
+}
+.custom-card .c-body {
+  height: 18rem;
+  background-color: rgb(209, 228, 252);
+}
+.custom-card img {
+  height: 13rem;
+}
+
+.card-style:hover {
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+}
+.card-style:active {
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.4);
+  transform: translateY(-1px);
+}

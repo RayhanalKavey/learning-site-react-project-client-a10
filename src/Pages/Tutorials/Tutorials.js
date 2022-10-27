@@ -1,28 +1,31 @@
 import React from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import Tutorial from "./Tutorial";
+import "./Tutorials.css";
 
 const Tutorials = () => {
   const tutorials = useLoaderData();
   console.log(tutorials);
   return (
-    <div>
+    <div className="tutorials-component py-4 pe-lg-4 px-5 px-lg-0 ">
       <div className="row">
-        <div className="col-lg-4">
-          <h2>React Tutorials</h2>
-          <div>
+        <div className="col-lg-3">
+          <h2 className="text-center mb-4">Tutorials Lists</h2>
+          <div className="link-tutorials">
             {tutorials.map((tutorial) => (
-              <p key={tutorial.id}>
-                {" "}
-                <Link to={`/tutorial-details/${tutorial.id}`}>
+              <Link to={`/tutorial-details/${tutorial.id}`}>
+                <div
+                  className="per-tutorial-link d-flex flex-column align-items-stretch text-center mb-3 mx-3"
+                  key={tutorial.id}
+                >
                   {tutorial.title}
-                </Link>
-              </p>
+                </div>
+              </Link>
             ))}
           </div>
         </div>
-        <div className="col-lg-8">
-          <h2>Tutorial Lists</h2>
+        <div className="col-lg-9">
+          <h2 className="mb-0">React Tutorials</h2>
           <div className="row">
             {tutorials.map((tutorial) => (
               <Tutorial

@@ -25,19 +25,19 @@ const Header = () => {
 
   return (
     <Navbar
-      className="nab-bar"
+      className="nab-bar  align-items-center"
       collapseOnSelect
       expand="lg"
-      bg="light"
-      variant="light"
+      // bg="light"
+      // variant="light"
     >
       <Container>
         <NavLink to="/">
-          <h5>The Complete React Guideline</h5>
+          <h5 className="nav-heading mt-2">The Complete React Guideline</h5>
         </NavLink>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse className="justify-content-end">
-          <Nav className="gap-4">
+          <Nav className="gap-4 align-items-center nav-item-link">
             <NavLink
               className={({ isActive }) =>
                 isActive ? "active-link" : undefined
@@ -64,10 +64,10 @@ const Header = () => {
             </NavLink>
             {/* login and register || logout */}
             {userInfo?.uid ? (
-              <div className="d-flex gap-3 ">
+              <div className="d-flex gap-3 align-items-center">
                 <NavLink onClick={handleSignOut}>Logout</NavLink>
                 <NavLink className="d-flex gap-3">
-                  <span>{userInfo?.displayName}</span>{" "}
+                  <span className="user-name">{userInfo?.displayName}</span>{" "}
                   <div>
                     <img
                       style={{ height: "40px", borderRadius: "50%" }}

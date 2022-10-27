@@ -1,14 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./Tutorial.css";
 
 const Tutorial = ({ tutorial }) => {
+  const { id, title, description, img, details } = tutorial;
   return (
-    <div className="col-lg-4">
+    <div className="custom-card col-lg-6 col-xl-4 g-4">
       <Link to={`/tutorial-details/${tutorial.id}`}>
-        <div className=" border border-3">
-          <h2>{tutorial?.title}</h2>
-          <p>{tutorial?.description}</p>
-          <p>{tutorial?.id}</p>
+        <div className="col ">
+          <div className="card card-style">
+            <img src={img} className="card-img-top" alt="" />
+            <div className="card-body c-body">
+              <h5 className="card-title fs-3 mb-4">{title}</h5>
+              <p className="card-text ">{description}</p>
+            </div>
+          </div>
         </div>
       </Link>
     </div>

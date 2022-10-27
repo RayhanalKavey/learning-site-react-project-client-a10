@@ -4,7 +4,14 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
-
-  color: rgb(85 85 85);
-  /* background-color: rgb(250, 243, 221); */
+  color: #243147;
+}
+body {
+  background-color: rgb(209, 173, 60);
+}
+/* .small-heading {
+  color: ;
+} */
+.color-text {
+  color: rgb(37, 37, 38);
 }

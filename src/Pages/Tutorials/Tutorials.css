@@ -1,0 +1,22 @@
+.link-tutorials a {
+  text-decoration: none;
+  color: rgb(37, 37, 38);
+}
+.per-tutorial-link {
+  padding: 5px 8px;
+  border: 1px solid rgb(37, 37, 38);
+  border-radius: 8px;
+}
+.per-tutorial-link:hover {
+  color: rgb(37, 37, 38);
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.4);
+  transform: translateY(-1px);
+}
+.per-tutorial-link:active {
+  color: rgb(37, 37, 38);
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.4);
+  transform: translateY(-0.5px);
+}
+.tutorials-component {
+  background-color: #e5f4ff;
+}

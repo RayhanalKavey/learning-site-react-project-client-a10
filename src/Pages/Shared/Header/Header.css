@@ -1,10 +1,31 @@
+.nab-bar {
+  background-color: #243147;
+  color: #e5f4ff;
+  height: 5rem;
+}
 .nab-bar a {
   text-decoration: none;
 }
-.active-link {
-  color: #e6d0b7;
-  border: 1px solid #f8f5e7;
+.nav-heading {
+  color: #e5f4ff;
 }
-.custom-tooltip {
+.nav-item-link a {
+  color: #e5f4ff;
+  padding: 4px 7px;
+  border-radius: 8px;
+  align-items: center;
+}
+.nav-item-link a:hover {
+  color: #a4b8ef;
+  /* border: 1px solid #f8f5e7; */
+}
+.active-link {
+  color: #a4b8ef;
+  border: 1px solid #a4b8ef;
+}
+/* .custom-tooltip {
   background-color: aqua;
+} */
+.user-name {
+  color: #e5f4ff;
 }
