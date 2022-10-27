@@ -3,6 +3,9 @@
   color: #e5f4ff;
   /* height: 5rem; */
 }
+.nab-bar-light {
+  text-decoration: none;
+}
 .nab-bar a {
   text-decoration: none;
 }
@@ -40,4 +43,18 @@
 .collapse-nav {
   background-color: #243147;
   margin-top: 2rem;
+}
+
+/* Toggle theme */
+.buttn {
+  padding: 4px 8px;
+  cursor: pointer;
+}
+.light-theme {
+  background-color: #e5f4ff;
+  color: #243147;
+}
+.dark-theme {
+  background-color: #4b7da0;
+  color: #e5f4ff;
 }

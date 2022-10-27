@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Header.css";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -11,6 +11,21 @@ import "./Header.css";
 
 const Header = () => {
   const { userInfo, setUserInfo, logout } = useContext(AuthContext);
+  // theme toggle
+  const [theme, setTheme] = useState("light-theme");
+  const [toggle, setToggle] = useState(true);
+  const toggleTheme = () => {
+    if (toggle) {
+      setToggle(!toggle);
+      setTheme("light-theme");
+    } else {
+      setToggle(!toggle);
+      setTheme("dark-theme");
+    }
+  };
+  //   useEffect(()=>{
+  // document.getElementsByClassName=
+  //   },[])
 
   /// --1 Handle log out
   const handleSignOut = () => {
@@ -63,9 +78,30 @@ const Header = () => {
             </NavLink>
             {/* login and register || logout */}
             {userInfo?.uid ? (
-              <div className="d-flex gap-3 align-items-center">
+              <div className="d-flex gap-3 align-items-center justify-content-end">
                 <NavLink onClick={handleSignOut}>Logout</NavLink>
                 {/* workinG Tooltip here */}
+                <div
+                  onClick={() => toggleTheme()}
+                  className={`buttn  ${theme}`}
+                >
+                  {" "}
+                  Switch theme
+                </div>
+                {/* <div className="form-check form-switch">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    id="flexSwitchCheckDefault"
+                  />
+                  <label
+                    className="form-check-label nab-bar-light"
+                    htmlFor="flexSwitchCheckDefault"
+                  >
+                    Default switch checkbox input{" "}
+                    <button className="nab-bar-light">button</button>
+                  </label>
+                </div> */}
               </div>
             ) : (
               <div className="d-flex justify-content-center align-items-center gap-2">
