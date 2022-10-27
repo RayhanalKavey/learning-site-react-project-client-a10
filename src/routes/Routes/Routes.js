@@ -24,7 +24,8 @@ export const router = createBrowserRouter([
       {
         path: "/tutorials",
         element: <Tutorials></Tutorials>,
-        loader: () => fetch("http://localhost:5005/tutorials"),
+        loader: () =>
+          fetch("https://assignment-10-server.vercel.app/tutorials"),
       },
       {
         path: "/faq",
@@ -40,14 +41,18 @@ export const router = createBrowserRouter([
       {
         path: "/tutorial-details/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:5005/tutorials/${params.id}`),
+          fetch(
+            `https://assignment-10-server.vercel.app/tutorials/${params.id}`
+          ),
 
         element: <TutorialDetails></TutorialDetails>,
       },
       {
         path: "/checkout/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:5005/tutorials/${params.id}`),
+          fetch(
+            `https://assignment-10-server.vercel.app/tutorials/${params.id}`
+          ),
         element: (
           <PrivateRoute>
             <Checkout></Checkout>
