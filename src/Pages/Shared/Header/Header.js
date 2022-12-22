@@ -60,14 +60,14 @@ const Header = () => {
             >
               Tutorials
             </NavLink>
-            <NavLink
+            {/* <NavLink
               className={({ isActive }) =>
                 isActive ? "active-link" : undefined
               }
               to="/faq"
             >
               FAQ
-            </NavLink>
+            </NavLink> */}
             <NavLink
               className={({ isActive }) =>
                 isActive ? "active-link" : undefined
@@ -81,13 +81,13 @@ const Header = () => {
               <div className="d-flex gap-3 align-items-center justify-content-end">
                 <NavLink onClick={handleSignOut}>Logout</NavLink>
                 {/* Tooltip here */}
-                <div
+                {/* <div
                   onClick={() => toggleTheme()}
                   className={`buttn  ${theme}`}
                 >
                   {" "}
                   Switch theme
-                </div>
+                </div> */}
                 {/*  */}
                 {/* <div className="form-check form-switch">
                   <input
