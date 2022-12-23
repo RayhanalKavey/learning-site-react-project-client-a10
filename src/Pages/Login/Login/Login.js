@@ -66,7 +66,7 @@ const Login = () => {
         toast.error(error.message);
       });
   };
-  // handle login 
+  // handle login
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -93,8 +93,8 @@ const Login = () => {
     // });
   };
   return (
-    <div className="form-position d-flex align-items-center-center justify-content-center ">
-      <Form className="c-form p-5 mt-5" onSubmit={handleSubmit}>
+    <div className="form-position d-flex align-items-center-center justify-content-center  ">
+      <Form className="c-form p-5 mt-5 m-5" onSubmit={handleSubmit}>
         <Form.Text className="d-block fw-bold fs-3  text-center form-text">
           Log in!
         </Form.Text>

@@ -150,7 +150,7 @@ const Register = () => {
   // --------------------------------------------
   return (
     <div className="form-position d-flex align-items-center-center justify-content-center ">
-      <Form className="c-form p-5 mt-5 w-50" onSubmit={handleSubmit}>
+      <Form className="c-form p-5 m-5 w-50" onSubmit={handleSubmit}>
         <Form.Text className="d-block fw-bold fs-3  text-center form-text">
           Not Register Yet!
         </Form.Text>
