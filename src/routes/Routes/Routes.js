@@ -22,6 +22,10 @@ export const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
+        path: "/home",
+        element: <Home></Home>,
+      },
+      {
         path: "/tutorials",
         element: <Tutorials></Tutorials>,
         loader: () => fetch(`${process.env.REACT_APP_URL_Server}/tutorials`),
